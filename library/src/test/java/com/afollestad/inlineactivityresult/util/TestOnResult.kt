@@ -21,33 +21,33 @@ import com.afollestad.inlineactivityresult.internal.OnResult
 import org.junit.Assert.fail
 
 internal class TestOnResult {
-  private var success: Boolean? = null
+  private var resultCode: Int? = null
   private var data: Intent? = null
-  private val capture: OnResult = { success, data ->
-    this.success = success
+  private val capture: OnResult = { resultCode, data ->
+    this.resultCode = resultCode
     this.data = data
   }
 
   @CheckResult fun capture(): OnResult = capture
 
   fun assertValues(
-    success: Boolean,
+    resultCode: Int,
     data: Intent
   ) {
-    if (this.success == null || this.data == null) {
+    if (this.resultCode == null || this.data == null) {
       fail("No invocations have been received.")
-    } else if (this.success != success) {
-      fail("Expected success=$success\nActual: ${this.success}")
+    } else if (this.resultCode != resultCode) {
+      fail("Expected resultCode=$resultCode\nActual: ${this.resultCode}")
     } else if (this.data != data) {
       fail("Expected data=$data\nActual: ${this.data}")
     }
     this.data = null
-    this.success = null
+    this.resultCode = null
   }
 
   fun assertNoValues() {
-    if (success != null || data != null) {
-      fail("Expected no values but got success=$success, data=$data")
+    if (resultCode != null || data != null) {
+      fail("Expected no values but got resultCode=$resultCode, data=$data")
     }
   }
 }

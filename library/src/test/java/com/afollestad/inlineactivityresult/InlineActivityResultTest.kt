@@ -72,7 +72,7 @@ class InlineActivityResultTest {
     assertThat(instance.pending).doesNotContainKey(requestCode)
 
     // Assert the callback invocation
-    onResult.assertValues(true, intent)
+    onResult.assertValues(RESULT_OK, intent)
   }
 
   @Test fun `schedule and deliver result - failure`() {
@@ -99,6 +99,6 @@ class InlineActivityResultTest {
     assertThat(instance.pending).doesNotContainKey(requestCode)
 
     // Assert the callback invocation
-    onResult.assertValues(false, intent)
+    onResult.assertValues(RESULT_CANCELED, intent)
   }
 }

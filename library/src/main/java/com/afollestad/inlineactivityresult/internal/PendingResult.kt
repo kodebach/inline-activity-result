@@ -15,13 +15,12 @@
  */
 package com.afollestad.inlineactivityresult.internal
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import androidx.fragment.app.FragmentManager
 import com.afollestad.inlineactivityresult.internal.InlineActivityResult.Companion.getTag
 import com.afollestad.inlineactivityresult.util.transact
 
-typealias OnResult = (success: Boolean, data: Intent) -> Unit
+typealias OnResult = (resultCode: Int, data: Intent) -> Unit
 
 /** @author Aidan Follestad (@afollestad) */
 internal data class PendingResult(
@@ -33,7 +32,7 @@ internal data class PendingResult(
     resultCode: Int,
     data: Intent
   ) {
-    onResult?.invoke(resultCode == RESULT_OK, data)
+    onResult?.invoke(resultCode, data)
     onResult = null
     removeFragment(requestCode)
   }
